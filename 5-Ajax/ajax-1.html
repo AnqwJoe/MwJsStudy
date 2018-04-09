@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="ajax.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		点击按钮时，读取abc.txt
+		<br />
+		<input type="button" name="btn" id="btn" value="读取" />
+		<script type="text/javascript">
+			var btn = document.getElementById("btn");
+			btn.onclick =function(){
+				ajax('abc.txt?t='+new Date().getTime(),function(str){
+					alert(str);
+				});
+			}
+		</script>
+	</body>
+</html>

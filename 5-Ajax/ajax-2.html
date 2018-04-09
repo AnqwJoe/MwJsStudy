@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="ajax.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			#div1{
+				width: 400px;
+				height: 400px;
+				background-color: #EEEEEE;
+				border: 1px solid #ccc;
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<input type="button" name="" id="" value="上海" />
+		<input type="button" name="" id="" value="云南" />
+		<input type="button" name="" id="" value="四川" />
+		<div id="div1">
+		</div>
+		
+		<script type="text/javascript">
+			var aBtn = document.getElementsByTagName('input');
+			var oDiv = document.getElementById("div1");
+			
+			for (var i = 0; i < aBtn.length; i++) {
+				aBtn[i].index= i;
+				aBtn[i].onclick = function(){
+					ajax(this.index +1+'.txt',function(str){
+						oDiv .innerHTML = str;
+					});
+				}
+			}
+		</script>
+	</body>
+</html>

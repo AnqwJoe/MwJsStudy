@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#div1{
+				width: 100px;
+				height: 150px;
+				background-color: #CCCCCC;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" name="" id="btn1" value="显示" />
+		<div id="div1">
+		</div>
+		
+		<script type="text/javascript">
+			var btn1 = document.getElementById("btn1");
+			var div1 = document.getElementById("div1");
+			btn1.onclick = function(ev){
+				div1.style.display='block';  //会冒泡到父级导致document被点击执行；
+				var oEvent = ev || event;
+				oEvent.cancelBubble = true;
+			}
+			
+			document.onclick = function(){
+				div1.style.display='none';
+			}
+		</script>
+	</body>
+</html>

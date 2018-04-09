@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#div1{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1"></div>
+		
+		<script type="text/javascript">
+			function setCookie(name,value,iDay){//发送
+				var oDate = new Date();
+				oDate.setDate(oDate.getDate()+iDay);
+				document.cookie = name+'='+value+';expires='+oDate;
+			}
+			
+			function getCookie(name){//获取
+				var arr = document.cookie.split('; ');
+				for (var i = 0; i < arr.length; i++) {
+					var arr2 = arr[i].split('=');
+					if (arr2[0]==name) {
+						return arr2[1];
+					}
+				}
+				return '';
+			}
+			
+			function removeCookie(){//删除COOKIE
+				setCookie(name,'1',-1);//让cookie昨天就过期
+			}
+			
+			var div1 = document.getElementById("div1");
+			var disX = 0;
+			var disY = 0;
+			
+			div1.onmousedown = function(ev){
+				var oEvent = ev||event;
+				disX = oEvent.clientX -div1.offsetLeft;
+				disY = oEvent.clientY -div1.offsetTop;
+				
+				document.onmousemove = function(ev){//onmousemove 只有在鼠标按下去后才会发生
+					var oEvent = ev||event;
+					var l = oEvent.clientX- disX;
+					var t = oEvent.clientY- disY;
+					var x = getCookie('x');
+					var y = getCookie('y');
+					
+					if (x) {
+						oDiv.style.left =x +'px';
+						oDiv.style.top = y +'px';
+					}
+					
+					if (l<0) {
+						l=0;
+					}else if(l>document.documentElement.clientWidth - div1.offsetWidth){
+						l = document.documentElement.clientWidth - div1.offsetWidth;
+					}
+					if (t<0) {
+						t=0;
+					}else if(t>document.documentElement.clientHeight - div1.offsetHeight){
+						t = document.documentElement.clientHeight - div1.offsetHeight;
+					}
+					
+					div1.style.left =l + 'px';
+					div1.style.top =t + 'px';
+					
+				};
+				
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					document.onmouseup = null;
+					
+					setCookie('x',oDiv.offsetLeft,5);
+					setCookie('y',oDiv.offsetTop,5);
+				}
+				return false;
+			};
+			
+		</script>
+	</body>
+</html>

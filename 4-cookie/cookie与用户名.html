@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<form action="" method="post" id="form1">
+			
+			用户名：<input type="text" name="user"/>
+			密码：<input type="password" name="pass"/>
+			<input type="submit" name="" id="" value="登陆" />
+			<a href="javascript:;">清楚记录</a>
+		</form>
+		
+		<script type="text/javascript">
+			function setCookie(name,value,iDay){//发送
+				var oDate = new Date();
+				oDate.setDate(oDate.getDate()+iDay);
+				document.cookie = name+'='+value+';expires='+oDate;
+			}
+			
+			function getCookie(name){//获取
+				var arr = document.cookie.split('; ');
+				for (var i = 0; i < arr.length; i++) {
+					var arr2 = arr[i].split('=');
+					if (arr2[0]==name) {
+						return arr2[1];
+					}
+				}
+				return '';
+			}
+			
+			function removeCookie(){//删除COOKIE
+				setCookie(name,'1',-1);//让cookie昨天就过期
+			}
+			
+			var form = document.getElementById("form1");
+			var user = document.getElementsByName('user')[0];
+			var btnclear = document.getElementsByTagName('a')[0];
+			form.onsubmit = function(){
+				setCookie('user',user.value,30);
+			}
+			
+			user.value = getCookie('user');
+			
+			btnclear.onclick = function(){
+				removeCookie('user');
+				user.value = '';
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<script type="text/javascript">
+			
+			function setCookie(name,value,iDay){//发送
+				var oDate = new Date();
+				oDate.setDate(oDate.getDate()+iDay);
+				document.cookie = name+'='+value+';expires='+oDate;
+			}
+			
+			function getCookie(name){//获取
+				var arr = document.cookie.split('; ');
+				for (var i = 0; i < arr.length; i++) {
+					var arr2 = arr[i].split('=');
+					if (arr2[0]==name) {
+						return arr2[1];
+					}
+				}
+				return '';
+			}
+			
+			function removeCookie(){//删除COOKIE
+				setCookie(name,'1',-1);//让cookie昨天就过期
+			}
+			
+			
+			setCookie('username','abc',30);
+			setCookie('password','123456',300);
+			alert(getCookie('username'));
+			
+/*			var oDate = new Date();
+			oDate.setDate(oDate.getDate()+30);//设置30天后过期
+			
+			document.cookie = 'user=joe;expires='+oDate;
+			document.cookie = 'pass=123';*/
+			
+			//alert(document.cookie);
+		</script>
+	</body>
+</html>

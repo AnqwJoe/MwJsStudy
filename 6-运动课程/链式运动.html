@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS运动——同时运动完美版</title>
+    <style>
+    #div1{ width: 100px; height: 100px; background: green; position: absolute; filter:alpha(opacity:30); opacity: .3;}
+    </style>
+    <script>
+    window.onload = function(){
+        var oDiv = document.getElementById('div1');
+        oDiv.onclick = function(){
+            startMove(this,{'width':200,'height':200,'opacity':100},function(){
+                startMove(oDiv,{'width':400,'height':400,'opacity':50})
+            });
+        }
+    }
+    function getStyle(obj, attr){
+        if(obj.currentStyle)    {
+            return obj.currentStyle[attr];
+        }else{
+            return getComputedStyle(obj, false)[attr];
+        }
+    }
+    function startMove(obj,json,fn){
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function(){
+            var bStop = true;
+            for(var attr in json){
+                //取当前值
+                var iCur = 0;
+                if(attr == 'opacity'){
+                    iCur = parseInt(parseFloat(getStyle(obj, attr))*100);
+                }else{
+                    iCur = parseInt(getStyle(obj,attr));
+                }
+                //计算速度
+                var iSpeed = (json[attr] - iCur) / 8;
+                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+                //检测停止
+                if(iCur != json[attr]){
+                    bStop = false;
+                }
+                if(attr=='opacity'){
+                    iCur += iSpeed
+                    obj.style.filter='alpha(opacity:' + iCur + ')';
+                    obj.style.opacity=iCur / 100;
+                }
+                else{
+                    obj.style[attr]=iCur+iSpeed+'px';
+                }
+            }
+            if(bStop){
+                clearInterval(obj.timer);
+                if(fn) fn();
+            }
+        },30)
+    }
+    </script>
+</head>
+<body>
+    <h4>点击下面的方块试试同时运动效果</h4>
+    <div id="div1"></div>
+</body>
+</html>

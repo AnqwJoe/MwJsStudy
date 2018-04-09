@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src='完美运动框架.js'></script>
+    <style type="text/css" media="screen">
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: absolute;
+
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var div1 = document.getElementById('div1');
+            div1.onmouseover = function(){
+                Move(div1,{'width':300,'height':300,'opacity':50,'left':200},function(){
+                    Move(div1,{'width':400,'height':400,'opacity':80,'left':100})
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

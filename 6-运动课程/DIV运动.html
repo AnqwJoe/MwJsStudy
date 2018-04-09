@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8" />
+    <title>js运动框架</title>
+    <style type="text/css" media="screen">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">点击运动</button>
+    <div id="div1"></div>
+
+    <script>
+        var oBtn = document.getElementById('btn');
+        var oDiv = document.getElementById('div1');
+        var timer = null;  //要在外面定义timer
+        oBtn.onclick = function(){
+            startMove();
+        }
+
+        function startMove(){
+            clearInterval(timer);//1.运动前先清定时器，防止定时器累加
+            var iSpeed = 5;//2.设置速度
+            timer = setInterval(function(){//3.设置定时器
+                if(oDiv.offsetLeft>=300){
+                    clearInterval(timer); //符合条件则停止
+                }else{
+                    //改变物体位置,执行运动
+                    oDiv.style.left = oDiv.offsetLeft + iSpeed +'px';
+                    document.title = oDiv.offsetLeft;
+                }
+
+            },30);
+        }
+    </script>
+</body>
+</html>

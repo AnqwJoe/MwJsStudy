@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#div1{
+				height: 200px;
+				width: 200px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<input type="button" name="btn1" id="btn1" value="样式" />
+		<div id="div1"></div>
+		
+		<script type="text/javascript">
+			function getStyle(obj,attr){
+				if(obj.currentStyle){
+					return obj.currentStyle[attr];
+				}else{
+					return getComputedStyle(obj,false)[attr];
+				}
+			}
+			
+			var btn1 = document.getElementById("btn1");
+			var div1 = document.getElementById("div1");
+			
+			btn1.onclick= function(){
+				css(div1,'background','green');
+				console.log(css(div1,'width'));
+			}
+			
+			function css(){
+				if(arguments.length == 2){//获取
+					return getStyle(arguments[0],arguments[1]);  //获取计算后的样式（当前样式、非行间）
+				}else if(arguments.length == 3){//设置
+					arguments[0].style[arguments[1]] = arguments[2];
+				}
+			}
+			
+			 
+		</script>
+		
+	</body>
+</html>

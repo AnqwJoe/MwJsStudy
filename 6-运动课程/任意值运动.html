@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css" media="screen">
+        div{
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+            float: left;
+            background: #ccc;
+            border: 10px solid black;
+            font-size: 14px;
+        }
+    </style>
+
+    <script>
+    window.onload=function(){
+        var oDiv1= document.getElementById('div1');
+        var oDiv2= document.getElementById('div2');
+        var oDiv3= document.getElementById('div3');
+        var oDiv4= document.getElementById('div4');
+
+        oDiv1.onmouseover = function(){
+            startMove(this,'height',400);
+        };
+        oDiv1.onmouseout = function(){
+            startMove(this,'height',100)
+        };
+        oDiv2.onmouseover = function(){
+            startMove(this,'width',400);
+        };
+        oDiv2.onmouseout = function(){
+            startMove(this,'width',100)
+        };
+        oDiv3.onmouseover = function(){
+            startMove(this,'fontSize',30);
+        };
+        oDiv3.onmouseout = function(){
+            startMove(this,'fontSize',14)
+        };
+        oDiv4.onmouseover = function(){
+            startMove(this,'borderWidth',30);
+        };
+        oDiv4.onmouseout = function(){
+            startMove(this,'borderWidth',10)
+        };
+    }
+
+    //开始运动
+    function startMove(obj,attr,iTarget){
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function(){
+            var current = parseInt(getStyle(obj,attr));
+                var speed = (iTarget-current)/6;
+                speed = speed>0 ? Math.ceil(speed):Math.floor(speed);
+
+                if (current == iTarget) {
+                    clearInterval(obj.timer)
+                } else{
+                    obj.style[attr] = current+speed +'px';
+                };
+
+        },30)
+    }
+
+    //获取综合样式
+    function getStyle(obj,attr){
+        return obj.currentStyle ? obj.currentStyle[attr] : window.getComputedStyle(obj,false)[attr];
+    }
+    </script>
+</head>
+<body>
+
+    <div id="div1">变高</div>
+    <div id="div2">变宽</div>
+    <div id="div3">abcdefg</div>
+    <div id="div4"></div>
+
+</body>
+</html>

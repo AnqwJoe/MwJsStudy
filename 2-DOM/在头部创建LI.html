@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<input type="text" name="" id="text1" value="" />
+		<input type="button" name="btn1" id="btn1" value="创建li" />
+		<ul id="ul1">
+		</ul>
+		
+		<script type="text/javascript">
+			var btn1 = document.getElementById("btn1");
+			var text1 = document.getElementById("text1");
+			var ul1 = document.getElementById("ul1");
+			
+			btn1.onclick = function(){
+				var oLi = document.createElement('li');
+				var aLi = ul1.getElementsByTagName('li');
+				oLi.innerHTML = text1.value;
+				
+				if(aLi.length==0){
+					ul1.appendChild(oLi);
+				}else{
+					ul1.insertBefore(oLi,aLi[0]);
+				}
+				text1.value = '';
+			}
+		</script>
+	</body>
+</html>
